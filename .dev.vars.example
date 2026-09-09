@@ -1,0 +1,5 @@
+TURNSTILE_SECRET=replace-with-a-local-or-test-secret
+TURNSTILE_HOSTNAMES=localhost,127.0.0.1
+RESEND_API_KEY=replace-with-a-resend-api-key
+SIGNUP_NOTIFICATION_TO=replace-with-evans-email-address
+SIGNUP_NOTIFICATION_FROM=SilverBack Barbell Club <replace-with-a-verified-sender>

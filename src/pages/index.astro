@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SignupForm from '../components/SignupForm.astro';
+import WorkoutArticle from '../components/WorkoutArticle.astro';
+import { formatDuration, formatSessionLabelDate, formatWorkoutDate, getAllWorkouts, getNewYorkDate, getPublicApiBaseUrl, getTodayWorkout } from '../lib/workouts';
+
+const [workouts, todayFromApi] = await Promise.all([getAllWorkouts(), getTodayWorkout()]);
+const featured = todayFromApi ?? workouts[0];
+const sessionLabel = featured
+  ? featured.date === getNewYorkDate() ? "Today's session" : `Latest session · ${formatSessionLabelDate(featured.date)}`
+  : 'Latest session';
+const recent = workouts.filter((workout) => workout.slug !== featured?.slug).slice(0, 8);
+---
+
+<BaseLayout
+  title="SilverBack Barbell Club | Strength for Life"
+  description="Workouts for strength, resilience, and longevity — without burnout, ego lifting, or unnecessary complexity."
+  canonicalPath="/"
+>
+  <section class="page-section">
+    <div class="site-shell">
+      <p class="eyebrow">SilverBack Barbell Club</p>
+      <h1>Strength for Life.<br />Resilience for the Long Run.</h1>
+      <p class="standfirst">We design workouts to build strength, resilience, and longevity — without burnout, ego lifting, or unnecessary complexity.</p>
+    </div>
+  </section>
+
+  <section class="page-section" data-live-today data-api-url={`${getPublicApiBaseUrl()}/api/public/today`}>
+    <div class="site-shell">
+      <div class="section-heading"><h2 data-session-label>{sessionLabel}</h2>{featured && <a data-permanent-link href={`/workouts/${featured.slug}/`}>Permanent link</a>}</div>
+      <div data-live-workout-slot>
+        {featured ? <WorkoutArticle workout={featured} headingLevel="h2" liveRegion /> : <p data-empty-workouts>No sessions are published yet. The first one will appear here when it is ready.</p>}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="site-shell">
+      <div class="section-heading"><h2>Recent sessions</h2><a href="/workouts/">Full archive</a></div>
+      {recent.length === 0 && <p>No earlier sessions are in the archive yet.</p>}
+      <ol class="archive-list">
+        {recent.map((workout) => (
+          <li>
+            <time datetime={workout.date}>{formatWorkoutDate(workout.date)}</time>
+            <a href={`/workouts/${workout.slug}/`}>{workout.name}</a>
+            {formatDuration(workout) && <span class="archive-list__minutes">{formatDuration(workout)}</span>}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="page-section" id="updates">
+    <div class="site-shell"><SignupForm /></div>
+  </section>
+  <script>import '../scripts/today';</script>
+</BaseLayout>

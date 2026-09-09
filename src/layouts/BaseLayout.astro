@@ -1,0 +1,89 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+}
+
+const { title, description, canonicalPath = Astro.url.pathname } = Astro.props;
+const canonical = new URL(canonicalPath, Astro.site);
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#EDEAE1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#17180F" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+    <script is:inline>
+      (() => {
+        const saved = localStorage.getItem('silverback-theme');
+        if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="site-shell site-header__inner">
+        <a class="wordmark" href="/">SilverBack Barbell Club</a>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="/workouts/" aria-current={currentPath.startsWith('/workouts') ? 'page' : undefined}>Workouts</a>
+          <a href="/about/" aria-current={currentPath === '/about/' ? 'page' : undefined}>About</a>
+          <a href="/app/" aria-current={currentPath === '/app/' ? 'page' : undefined}>3-2-1 Log</a>
+        </nav>
+        <div class="theme-controls" role="group" aria-label="Color theme">
+          <button type="button" data-theme-choice="system" aria-pressed="true">Auto</button>
+          <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+          <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+        </div>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="site-shell site-footer__inner">
+        <span>SilverBack Barbell Club</span>
+        <span class="mono">Strength for the long run.</span>
+      </div>
+    </footer>
+    <script>
+      const controls = document.querySelectorAll<HTMLButtonElement>('[data-theme-choice]');
+      const saved = localStorage.getItem('silverback-theme');
+      const selected = saved === 'light' || saved === 'dark' ? saved : 'system';
+      const setTheme = (choice: string) => {
+        if (choice === 'light' || choice === 'dark') {
+          document.documentElement.dataset.theme = choice;
+          localStorage.setItem('silverback-theme', choice);
+        } else {
+          delete document.documentElement.dataset.theme;
+          localStorage.removeItem('silverback-theme');
+        }
+        controls.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.themeChoice === choice)));
+      };
+      setTheme(selected);
+      controls.forEach((button) => button.addEventListener('click', () => setTheme(button.dataset.themeChoice ?? 'system')));
+    </script>
+    <style>
+      .skip-link {
+        position: fixed;
+        top: 0.5rem;
+        left: 0.5rem;
+        z-index: 10;
+        padding: 0.6rem;
+        background: var(--surface);
+        transform: translateY(-200%);
+      }
+      .skip-link:focus { transform: translateY(0); }
+    </style>
+  </body>
+</html>

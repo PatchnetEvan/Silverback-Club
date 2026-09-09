@@ -1,0 +1,34 @@
+{
+  "name": "silverback-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "build:fixture": "ASTRO_TELEMETRY_DISABLED=1 USE_WORKOUT_FIXTURE=true astro check && ASTRO_TELEMETRY_DISABLED=1 USE_WORKOUT_FIXTURE=true astro build",
+    "build:empty-fixture": "ASTRO_TELEMETRY_DISABLED=1 USE_WORKOUT_FIXTURE=true USE_EMPTY_WORKOUT_FIXTURE=true astro build",
+    "preview": "wrangler dev",
+    "typecheck": "ASTRO_TELEMETRY_DISABLED=1 astro check && tsc -p tsconfig.worker.json --noEmit",
+    "test": "npm run build:fixture && vitest run",
+    "cf:typegen": "wrangler types --env-file .dev.vars.example --strict-vars false",
+    "cf:dry-run": "npm run build && WRANGLER_LOG_PATH=/tmp/silverback-wrangler.log wrangler deploy --dry-run",
+    "cf:dry-run:fixture": "npm run build:fixture && WRANGLER_LOG_PATH=/tmp/silverback-wrangler.log wrangler deploy --dry-run",
+    "db:migrate:local": "wrangler d1 migrations apply silverback-subscribers --local"
+  },
+  "dependencies": {
+    "astro": "7.3.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "@cloudflare/vitest-pool-workers": "0.22.0",
+    "@cloudflare/workers-types": "latest",
+    "@types/node": "26.5.0",
+    "typescript": "6.0.3",
+    "vitest": "4.1.11",
+    "wrangler": "4.130.0"
+  },
+  "overrides": {
+    "sharp": "0.35.4"
+  }
+}

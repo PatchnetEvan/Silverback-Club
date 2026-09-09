@@ -1,0 +1,12 @@
+/weekly-workouts/  /workouts/  301
+/how-we-train/  /about/  301
+/logo/  /  301
+/feed/  /workouts/  301
+/comments/feed/  /workouts/  301
+/superpwa-manifest.json  /  301
+/index.php  /  301
+/WORKOUT/*  /workouts/  301
+/logo/*  /  301
+/silverback-barbell-club/*  /  301
+/wp-content/uploads/*  /  301
+/wp-sitemap*  /sitemap.xml  301

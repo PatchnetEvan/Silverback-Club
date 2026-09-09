@@ -1,0 +1,75 @@
+/* SilverBack Barbell Club — "Iron & Paper" design tokens
+ * The only palette and type scale for silverbackbarbell.com.
+ * Do not add colors. Do not add typefaces. If something needs a shade
+ * that isn't here, raise it before inventing one.
+ *
+ * Fonts (Google Fonts, the one permitted external stylesheet host):
+ *   Zilla Slab 500/700     — display, headings
+ *   Source Sans 3 400/600  — body
+ *   IBM Plex Mono 400/500  — anything containing a number: dates,
+ *                            rest intervals, set counts, est. minutes
+ *
+ * Three viewer theme states must all resolve correctly:
+ *   1. bare :root                              — light (and OS-light)
+ *   2. prefers-color-scheme: dark, unstamped   — dark
+ *   3. [data-theme="light"|"dark"] stamped     — explicit choice wins
+ * Never define a color only inside a media or [data-theme] block.
+ */
+
+:root{
+    --paper:#EDEAE1;
+    --surface:#F5F3ED;
+    --ink:#1A1B16;
+    --ink-soft:#5D5E52;
+    --ink-faint:#8A8B7D;
+    --rule:#C8C4B5;
+    --rule-soft:#DBD7CB;
+    --olive:#556232;
+    --olive-lift:#6E7E43;
+    --rust:#8C4A28;
+    --shadow:rgba(26,27,22,.09);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#17180F;
+      --surface:#1F2018;
+      --ink:#E9E6DA;
+      --ink-soft:#A9A99A;
+      --ink-faint:#7B7C6E;
+      --rule:#3A3B30;
+      --rule-soft:#2B2C23;
+      --olive:#A8BA6A;
+      --olive-lift:#BECD84;
+      --rust:#CF8055;
+      --shadow:rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#17180F;
+    --surface:#1F2018;
+    --ink:#E9E6DA;
+    --ink-soft:#A9A99A;
+    --ink-faint:#7B7C6E;
+    --rule:#3A3B30;
+    --rule-soft:#2B2C23;
+    --olive:#A8BA6A;
+    --olive-lift:#BECD84;
+    --rust:#CF8055;
+    --shadow:rgba(0,0,0,.4);
+  }
+
+/* ---- usage rules ----------------------------------------------------
+ * --olive   the single accent. Links, section numbers, the rule under a
+ *           spec block. Sparingly — if everything is olive, nothing is.
+ * --rust    reserved for things needing a decision from the reader.
+ *           Not for emphasis. Not for headings. Not for errors that are
+ *           merely validation.
+ * --rule    hairlines between rows and sections. This site uses rules,
+ *           not cards: no border-radius, no box-shadow on content.
+ * --surface only for genuinely inset things — a spec block, a form.
+ *
+ * Type scale (rem): 0.66 0.72 0.85 1 1.08 1.5 1.72 2.4→3.9 (clamped display)
+ * Body measure: ~68ch. Standfirst: ~62ch. Never full-bleed running text.
+ * Uppercase mono labels: 10.5–11px, letter-spacing .13–.16em.
+ * Digits in columns: font-variant-numeric: tabular-nums.
+ * -------------------------------------------------------------------- */

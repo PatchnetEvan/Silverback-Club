@@ -1,0 +1,175 @@
+{
+  "workouts": [
+    {
+      "slug": "2026-09-09-knees-forward-leg-press-knee-resilience",
+      "date": "2026-09-09",
+      "name": "KNEES FORWARD — LEG PRESS + KNEE RESILIENCE",
+      "focus": "Quad strength, controlled knee-over-toe positions, lower-leg strength, and knee resilience.",
+      "duration_min": 55,
+      "duration_max": 65,
+      "blocks": [
+        {
+          "name": "WARM-UP",
+          "prescription": "2 rounds",
+          "notes": null,
+          "movements": [
+            { "name": "Easy Bike", "detail": "2 min" },
+            { "name": "Tibialis Raise", "detail": "15 reps" }
+          ]
+        },
+        {
+          "name": "MOVEMENT PREP",
+          "prescription": "3 rounds",
+          "notes": "Move with control. Use a range you own.",
+          "movements": [
+            { "name": "Spanish Squat", "detail": "10 reps · 3 sec lower" },
+            { "name": "Ankle Rock", "detail": "8 / side" }
+          ]
+        },
+        {
+          "name": "PRIMARY LEG PRESS",
+          "prescription": "set 5 / 5 · Rest 90–120s",
+          "notes": null,
+          "movements": [
+            { "name": "Leg Press", "detail": "8 reps · 2 RIR" }
+          ]
+        },
+        {
+          "name": "LOWER-LEG STRENGTH",
+          "prescription": "3 sets · Rest 60s",
+          "notes": null,
+          "movements": [
+            { "name": "Standing Calf Raise", "detail": "12–15 reps" },
+            { "name": "Tibialis Raise", "detail": "15–20 reps" }
+          ]
+        },
+        {
+          "name": "WARM-DOWN & MOBILITY",
+          "prescription": "6 min",
+          "notes": null,
+          "movements": [
+            { "name": "Couch Stretch", "detail": "45s / side" },
+            { "name": "Calf Stretch", "detail": "45s / side" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "2026-09-06-pull-and-carry",
+      "date": "2026-09-06",
+      "name": "PULL & CARRY — BACK STRENGTH + GRIP",
+      "focus": "Upper-back strength, a patient hinge, and enough loaded carrying to make grip matter.",
+      "duration_min": 50,
+      "duration_max": 60,
+      "blocks": [
+        { "name": "WARM-UP", "prescription": "2 rounds", "notes": null, "movements": [{ "name": "Row", "detail": "2 min" }] },
+        { "name": "MOVEMENT PREP", "prescription": "3 rounds", "notes": null, "movements": [{ "name": "Half-Kneeling Lat Pulldown", "detail": "10 / side" }] },
+        { "name": "PRIMARY PULL", "prescription": "5 sets · Rest 90s", "notes": null, "movements": [{ "name": "Chest-Supported Row", "detail": "8 reps · 2 RIR" }] },
+        { "name": "CARRY", "prescription": "4 trips · Rest 60s", "notes": null, "movements": [{ "name": "Suitcase Carry", "detail": "30m / side" }] },
+        { "name": "WARM-DOWN & MOBILITY", "prescription": "6 min", "notes": null, "movements": [{ "name": "Open Book", "detail": "6 / side" }] }
+      ]
+    },
+    {
+      "slug": "2026-08-30-press-with-room",
+      "date": "2026-08-30",
+      "name": "PRESS WITH ROOM — SHOULDERS + THORACIC CONTROL",
+      "focus": "Pressing strength without forcing range, backed by scapular control and thoracic extension.",
+      "duration_min": 50,
+      "duration_max": 60,
+      "blocks": [
+        { "name": "WARM-UP", "prescription": "2 rounds", "notes": null, "movements": [{ "name": "Easy Bike", "detail": "2 min" }] },
+        { "name": "MOVEMENT PREP", "prescription": "3 rounds", "notes": null, "movements": [{ "name": "Wall Slide", "detail": "8 reps" }] },
+        { "name": "PRIMARY PRESS", "prescription": "5 sets · Rest 90s", "notes": null, "movements": [{ "name": "Landmine Press", "detail": "8 / side · 2 RIR" }] },
+        { "name": "WARM-DOWN & MOBILITY", "prescription": "7 min", "notes": null, "movements": [{ "name": "Bench T-Spine Extension", "detail": "6 breaths" }] }
+      ]
+    },
+    {
+      "slug": "2026-08-23-single-leg-foundations",
+      "date": "2026-08-23",
+      "name": "SINGLE-LEG FOUNDATIONS — SPLIT STANCE + BALANCE",
+      "focus": "Single-leg strength, controlled deceleration, and balance that carries into ordinary life.",
+      "duration_min": 50,
+      "duration_max": 60,
+      "blocks": [
+        { "name": "WARM-UP", "prescription": "2 rounds", "notes": null, "movements": [{ "name": "March", "detail": "30 steps" }] },
+        { "name": "MOVEMENT PREP", "prescription": "3 rounds", "notes": null, "movements": [{ "name": "Split Squat Iso", "detail": "20s / side" }] },
+        { "name": "PRIMARY", "prescription": "4 sets · Rest 75s", "notes": null, "movements": [{ "name": "Rear-Foot Elevated Split Squat", "detail": "8 / side" }] },
+        { "name": "WARM-DOWN & MOBILITY", "prescription": "6 min", "notes": null, "movements": [{ "name": "90/90 Hip Switch", "detail": "8 reps" }] }
+      ]
+    },
+    {
+      "slug": "2026-08-16-hinge-and-brace",
+      "date": "2026-08-16",
+      "name": "HINGE & BRACE — POSTERIOR CHAIN + TRUNK",
+      "focus": "A strong hinge, steady trunk position, and useful posterior-chain volume.",
+      "duration_min": 55,
+      "duration_max": 65,
+      "blocks": [
+        { "name": "WARM-UP", "prescription": "2 rounds", "notes": null, "movements": [{ "name": "Walk", "detail": "3 min" }] },
+        { "name": "MOVEMENT PREP", "prescription": "3 rounds", "notes": null, "movements": [{ "name": "Hip Hinge Drill", "detail": "10 reps" }] },
+        { "name": "PRIMARY HINGE", "prescription": "5 sets · Rest 120s", "notes": null, "movements": [{ "name": "Romanian Deadlift", "detail": "6 reps · 2 RIR" }] },
+        { "name": "WARM-DOWN & MOBILITY", "prescription": "7 min", "notes": null, "movements": [{ "name": "Hamstring Floss", "detail": "8 / side" }] }
+      ]
+    },
+    {
+      "slug": "2026-08-09-move-sideways",
+      "date": "2026-08-09",
+      "name": "MOVE SIDEWAYS — LATERAL STRENGTH + DECELERATION",
+      "focus": "Lateral movement, position control, and the strength to stop cleanly.",
+      "duration_min": 45,
+      "duration_max": 55,
+      "blocks": [
+        { "name": "WARM-UP", "prescription": "2 rounds", "notes": null, "movements": [{ "name": "Lateral March", "detail": "20m" }] },
+        { "name": "MOVEMENT PREP", "prescription": "3 rounds", "notes": null, "movements": [{ "name": "Lateral Lunge", "detail": "6 / side" }] },
+        { "name": "STRENGTH", "prescription": "4 sets · Rest 75s", "notes": null, "movements": [{ "name": "Cossack Squat", "detail": "6 / side" }] },
+        { "name": "WARM-DOWN & MOBILITY", "prescription": "6 min", "notes": null, "movements": [{ "name": "Adductor Rockback", "detail": "8 / side" }] }
+      ]
+    },
+    {
+      "slug": "2026-08-02-steady-work",
+      "date": "2026-08-02",
+      "name": "STEADY WORK — SQUAT + EASY CONDITIONING",
+      "focus": "Simple squat volume followed by conditioning that leaves enough in reserve for the next session.",
+      "duration_min": 50,
+      "duration_max": 60,
+      "blocks": [
+        { "name": "WARM-UP", "prescription": "2 rounds", "notes": null, "movements": [{ "name": "Bike", "detail": "3 min" }] },
+        { "name": "MOVEMENT PREP", "prescription": "3 rounds", "notes": null, "movements": [{ "name": "Goblet Squat", "detail": "8 reps" }] },
+        { "name": "SQUAT", "prescription": "5 sets · Rest 90s", "notes": null, "movements": [{ "name": "Box Squat", "detail": "6 reps · 2 RIR" }] },
+        { "name": "CONDITIONING", "prescription": "10 min", "notes": "Keep a pace you could hold for another five minutes.", "movements": [{ "name": "Bike", "detail": "steady" }] },
+        { "name": "WARM-DOWN & MOBILITY", "prescription": "5 min", "notes": null, "movements": [{ "name": "Breathing", "detail": "5 slow breaths" }] }
+      ]
+    },
+    {
+      "slug": "2026-07-26-push-pull-repeat",
+      "date": "2026-07-26",
+      "name": "PUSH, PULL, REPEAT — UPPER-BODY STRENGTH",
+      "focus": "Balanced upper-body work with clear effort targets and no wasted volume.",
+      "duration_min": 50,
+      "duration_max": 60,
+      "blocks": [
+        { "name": "WARM-UP", "prescription": "2 rounds", "notes": null, "movements": [{ "name": "Ski Erg", "detail": "2 min" }] },
+        { "name": "MOVEMENT PREP", "prescription": "3 rounds", "notes": null, "movements": [{ "name": "Band Pull-Apart", "detail": "15 reps" }] },
+        { "name": "PRIMARY", "prescription": "5 sets · Rest 90s", "notes": null, "movements": [{ "name": "Dumbbell Bench Press", "detail": "8 reps · 2 RIR" }] },
+        { "name": "ACCESSORY", "prescription": "3 sets · Rest 60s", "notes": null, "movements": [{ "name": "Cable Row", "detail": "12 reps" }, { "name": "Incline Push-Up", "detail": "10 reps" }] },
+        { "name": "WARM-DOWN & MOBILITY", "prescription": "6 min", "notes": null, "movements": [{ "name": "Pec Stretch", "detail": "45s / side" }] }
+      ]
+    },
+    {
+      "slug": "2026-07-19-get-off-the-floor",
+      "date": "2026-07-19",
+      "name": "GET OFF THE FLOOR — GROUND CONTROL + CARRY",
+      "focus": "Practice moving through low positions, standing with control, and carrying with an even gait.",
+      "duration_min": 45,
+      "duration_max": 55,
+      "blocks": [
+        { "name": "WARM-UP", "prescription": "2 rounds", "notes": null, "movements": [{ "name": "Floor Transfer", "detail": "4 / side" }] },
+        { "name": "MOVEMENT PREP", "prescription": "3 rounds", "notes": null, "movements": [{ "name": "Half-Kneeling Get-Up", "detail": "5 / side" }] },
+        { "name": "STRENGTH", "prescription": "4 sets · Rest 75s", "notes": null, "movements": [{ "name": "Goblet Squat", "detail": "8 reps" }] },
+        { "name": "CARRY", "prescription": "5 trips · Rest 45s", "notes": null, "movements": [{ "name": "Farmer Carry", "detail": "30m" }] },
+        { "name": "WARM-DOWN & MOBILITY", "prescription": "6 min", "notes": null, "movements": [{ "name": "Child's Pose", "detail": "5 breaths" }] }
+      ]
+    }
+  ],
+  "next_cursor": null
+}

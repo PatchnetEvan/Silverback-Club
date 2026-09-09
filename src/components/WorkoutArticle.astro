@@ -1,0 +1,42 @@
+---
+import type { Workout } from '../lib/workouts';
+import { formatDuration, formatWorkoutDate } from '../lib/workouts';
+
+interface Props {
+  workout: Workout;
+  headingLevel?: 'h1' | 'h2';
+  liveRegion?: boolean;
+}
+
+const { workout, headingLevel = 'h1', liveRegion = false } = Astro.props;
+const Heading = headingLevel;
+const BlockHeading = headingLevel === 'h1' ? 'h2' : 'h3';
+const duration = formatDuration(workout);
+---
+
+<article class="workout" data-workout-article data-workout-slug={workout.slug} data-workout-json={JSON.stringify(workout)} aria-live={liveRegion ? 'polite' : undefined}>
+  <p class="eyebrow">
+    <time datetime={workout.date} data-workout-date>{formatWorkoutDate(workout.date)}</time>
+    <span aria-hidden="true"> · </span>
+    <span data-workout-count>{workout.blocks.length} blocks</span>
+    {duration && <><span aria-hidden="true"> · </span><span data-workout-minutes>{duration}</span></>}
+  </p>
+  <Heading data-workout-name>{workout.name}</Heading>
+  {workout.focus && <p class="standfirst" data-workout-focus>{workout.focus}</p>}
+  <div class="workout__blocks" data-workout-blocks>
+    {workout.blocks.map((block) => (
+      <section class="workout-block">
+        {block.name && <BlockHeading>{block.name}</BlockHeading>}
+        {block.prescription && <p class="workout-block__prescription">{block.prescription}</p>}
+        {block.movements.length > 0 && (
+          <ul class="movement-list">
+            {block.movements.map((movement) => (
+              <li class:list={{ 'movement-list__single': movement.detail === null }}><span>{movement.name}</span>{movement.detail && <span class="movement-list__detail">{movement.detail}</span>}</li>
+            ))}
+          </ul>
+        )}
+      </section>
+    ))}
+  </div>
+  <p class="workout__credit">We run these sessions in <a href="/app/">3-2-1 Log</a>.</p>
+</article>

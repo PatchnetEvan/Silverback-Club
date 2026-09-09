@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDuration, formatWorkoutDate, formatWorkoutMonth, getAllWorkouts, type Workout } from '../../lib/workouts';
+
+const workouts = await getAllWorkouts();
+const months = new Map<string, Workout[]>();
+for (const workout of workouts) {
+  const month = formatWorkoutMonth(workout.date);
+  months.set(month, [...(months.get(month) ?? []), workout]);
+}
+---
+
+<BaseLayout title="Workout Archive | SilverBack Barbell Club" description="The complete SilverBack Barbell Club workout archive, newest first." canonicalPath="/workouts/">
+  <section class="page-section">
+    <div class="site-shell">
+      <p class="eyebrow">The work, kept in order</p>
+      <h1>Workout archive</h1>
+      <p class="standfirst">Full sessions, newest first. Each one is built to be trained, adjusted, and returned to.</p>
+      {workouts.length === 0 && <p class="prose">No sessions are published yet. The archive will be here when the first one is ready.</p>}
+      {[...months.entries()].map(([month, monthWorkouts]) => (
+        <section class="archive-month">
+          <h2>{month}</h2>
+          <ol class="archive-list">
+            {monthWorkouts.map((workout) => (
+              <li>
+                <time datetime={workout.date}>{formatWorkoutDate(workout.date)}</time>
+                <a href={`/workouts/${workout.slug}/`}>{workout.name}</a>
+                {formatDuration(workout) && <span class="archive-list__minutes">{formatDuration(workout)}</span>}
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

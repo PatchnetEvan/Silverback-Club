@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkoutArticle from '../../components/WorkoutArticle.astro';
+import { getAllWorkouts, type Workout } from '../../lib/workouts';
+
+export async function getStaticPaths() {
+  const workouts = await getAllWorkouts();
+  return workouts.map((workout, index) => ({
+    params: { slug: workout.slug },
+    props: {
+      workout,
+      newer: index > 0 ? workouts[index - 1] : null,
+      older: index < workouts.length - 1 ? workouts[index + 1] : null,
+    },
+  }));
+}
+
+interface Props {
+  workout: Workout;
+  newer: Workout | null;
+  older: Workout | null;
+}
+
+const { workout, newer, older } = Astro.props;
+---
+
+<BaseLayout title={`${workout.name} | SilverBack Barbell Club`} description={workout.focus ?? `${workout.name}, a SilverBack Barbell Club workout.`} canonicalPath={`/workouts/${workout.slug}/`}>
+  <section class="page-section">
+    <div class="site-shell">
+      <WorkoutArticle workout={workout} />
+      <nav class="workout-nav" aria-label="Adjacent workouts">
+        <span>{older && <a href={`/workouts/${older.slug}/`}>← {older.name}</a>}</span>
+        <span>{newer && <a href={`/workouts/${newer.slug}/`}>{newer.name} →</a>}</span>
+      </nav>
+    </div>
+  </section>
+</BaseLayout>

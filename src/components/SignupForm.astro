@@ -1,0 +1,25 @@
+---
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || (process.env.USE_WORKOUT_FIXTURE === 'true' ? '1x00000000000000000000AA' : '');
+if (!siteKey) throw new Error('PUBLIC_TURNSTILE_SITE_KEY is required for a production build.');
+---
+
+<section class="signup" aria-labelledby="signup-title">
+  <p class="eyebrow">Optional, no strings attached</p>
+  <h2 id="signup-title">Get new workouts by email.</h2>
+  <p class="prose">A short note when a new session is ready. No challenges, countdowns, or daily noise.</p>
+  <form action="/api/subscribe" method="post">
+    <div class="signup__fields">
+      <label>First name<input name="first_name" autocomplete="given-name" maxlength="80" required /></label>
+      <label>Last name<input name="last_name" autocomplete="family-name" maxlength="80" required /></label>
+      <label>Email<input type="email" name="email" autocomplete="email" maxlength="254" required /></label>
+    </div>
+    <input type="hidden" name="source" value="homepage" />
+    <div class="signup__actions">
+      <div class="cf-turnstile" data-sitekey={siteKey} data-action="subscribe"></div>
+      <button type="submit">Send me new workouts</button>
+    </div>
+    <p class="form-note">Completely optional. Unsubscribe whenever you like.</p>
+  </form>
+</section>
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
