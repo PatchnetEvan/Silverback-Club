@@ -9,7 +9,7 @@
     "build:fixture": "ASTRO_TELEMETRY_DISABLED=1 USE_WORKOUT_FIXTURE=true astro check && ASTRO_TELEMETRY_DISABLED=1 USE_WORKOUT_FIXTURE=true astro build",
     "build:empty-fixture": "ASTRO_TELEMETRY_DISABLED=1 USE_WORKOUT_FIXTURE=true USE_EMPTY_WORKOUT_FIXTURE=true astro build",
     "preview": "wrangler dev",
-    "typecheck": "ASTRO_TELEMETRY_DISABLED=1 astro check && tsc -p tsconfig.worker.json --noEmit",
+    "typecheck": "npm run cf:typegen && ASTRO_TELEMETRY_DISABLED=1 astro check && tsc -p tsconfig.worker.json --noEmit",
     "test": "npm run build:fixture && vitest run",
     "cf:typegen": "wrangler types --env-file .dev.vars.example --strict-vars false",
     "cf:dry-run": "npm run build && WRANGLER_LOG_PATH=/tmp/silverback-wrangler.log wrangler deploy --dry-run",
