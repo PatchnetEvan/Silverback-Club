@@ -11,7 +11,7 @@
     "preview": "wrangler dev",
     "typecheck": "npm run cf:typegen && ASTRO_TELEMETRY_DISABLED=1 astro check && tsc -p tsconfig.worker.json --noEmit",
     "test": "npm run build:fixture && vitest run",
-    "cf:typegen": "wrangler types --env-file .dev.vars.example --strict-vars false",
+    "cf:typegen": "WRANGLER_LOG_PATH=/tmp/silverback-wrangler.log wrangler types --env-file .dev.vars.example --strict-vars false",
     "cf:dry-run": "npm run build && WRANGLER_LOG_PATH=/tmp/silverback-wrangler.log wrangler deploy --dry-run",
     "cf:dry-run:fixture": "npm run build:fixture && WRANGLER_LOG_PATH=/tmp/silverback-wrangler.log wrangler deploy --dry-run",
     "db:migrate:local": "wrangler d1 migrations apply silverback-subscribers --local"
