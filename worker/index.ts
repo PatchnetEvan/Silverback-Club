@@ -58,23 +58,32 @@ function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[character] ?? character);
 }
 
+// Cloudflare Email Sending, through the `send_email` binding — no API key, no
+// third party. The same route pro.threetwone.com already uses for its own mail.
+//
+// The `from` domain must be onboarded onto Email Sending first
+// (`wrangler email sending enable silverbackbarbell.com`), which is what writes
+// the DKIM records into the zone. Until that is done this throws, which is why
+// the caller treats a failed notification as non-fatal: the subscriber row is
+// already committed and losing the notification must not lose the signup.
 async function sendSignupNotification(subscriber: { firstName: string; lastName: string; email: string; country: string | null }, env: Env): Promise<void> {
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${env.RESEND_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: env.SIGNUP_NOTIFICATION_FROM,
-      to: [env.SIGNUP_NOTIFICATION_TO],
-      subject: `New SilverBack signup: ${subscriber.firstName} ${subscriber.lastName}`,
-      text: `New SilverBack Barbell Club signup\n\nName: ${subscriber.firstName} ${subscriber.lastName}\nEmail: ${subscriber.email}\nCountry: ${subscriber.country ?? 'Unknown'}`,
-      html: `<p>New SilverBack Barbell Club signup</p><dl><dt>Name</dt><dd>${escapeHtml(subscriber.firstName)} ${escapeHtml(subscriber.lastName)}</dd><dt>Email</dt><dd>${escapeHtml(subscriber.email)}</dd><dt>Country</dt><dd>${escapeHtml(subscriber.country ?? 'Unknown')}</dd></dl>`,
-    }),
-    signal: AbortSignal.timeout(10_000),
+  // Unset is an ordinary state before the domain is onboarded, not a fault.
+  // Skip quietly rather than throwing once per signup into the error log.
+  if (!env.SIGNUP_NOTIFICATION_TO || !env.SIGNUP_NOTIFICATION_FROM) {
+    console.log(JSON.stringify({ message: 'signup notification not configured; skipping' }));
+    return;
+  }
+  const name = `${subscriber.firstName} ${subscriber.lastName}`;
+  await env.EMAIL.send({
+    to: env.SIGNUP_NOTIFICATION_TO,
+    from: { email: env.SIGNUP_NOTIFICATION_FROM, name: 'SilverBack Barbell Club' },
+    // The subscriber's own address, so replying to the notification reaches
+    // them rather than the Worker's send-only mailbox.
+    replyTo: subscriber.email,
+    subject: `New SilverBack signup: ${name}`,
+    text: `New SilverBack Barbell Club signup\n\nName: ${name}\nEmail: ${subscriber.email}\nCountry: ${subscriber.country ?? 'Unknown'}`,
+    html: `<p>New SilverBack Barbell Club signup</p><dl><dt>Name</dt><dd>${escapeHtml(name)}</dd><dt>Email</dt><dd>${escapeHtml(subscriber.email)}</dd><dt>Country</dt><dd>${escapeHtml(subscriber.country ?? 'Unknown')}</dd></dl>`,
   });
-  if (!response.ok) throw new Error(`Resend returned ${response.status}.`);
 }
 
 async function assetPage(request: Request, env: Env, pathname: string, status: number): Promise<Response> {

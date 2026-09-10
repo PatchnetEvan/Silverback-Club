@@ -11,15 +11,49 @@
     "not_found_handling": "404-page",
     "run_worker_first": ["/api/*"]
   },
+  // Kept explicitly true. Adding "routes" makes Wrangler disable workers.dev
+  // by default, which silently took the preview URL offline the first time —
+  // and that URL is what gets reviewed before and after cutover, so it is not
+  // collateral we want.
+  "workers_dev": true,
+  // Definition of done #1: silverbackbarbell.com AND www. both serve this
+  // site. Both are custom domains on the Worker rather than one redirecting to
+  // the other, which also keeps the old-URL map to a single hop — §6.2's "no
+  // chains" rule. The canonical <link> and the sitemap name the apex, so that
+  // is the host search engines settle on; www serves identical pages and
+  // defers to it via canonical rather than via a second redirect.
+  "routes": [
+    { "pattern": "silverbackbarbell.com", "custom_domain": true },
+    { "pattern": "www.silverbackbarbell.com", "custom_domain": true }
+  ],
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "silverback-subscribers",
+      "database_id": "fbc10884-514f-44d8-af96-574415518af3",
       "migrations_dir": "./migrations"
     }
   ],
+  // Cloudflare Email Sending. No API key and no third party — the same route
+  // pro.threetwone.com already uses. The sender domain has to be onboarded
+  // once with `wrangler email sending enable silverbackbarbell.com`, which is
+  // what writes the DKIM records into the zone.
+  "send_email": [
+    {
+      "name": "EMAIL",
+      // So `wrangler dev` proxies sends to the real service instead of
+      // pretending to succeed locally.
+      "remote": true
+    }
+  ],
   "vars": {
-    "TURNSTILE_HOSTNAMES": "silverbackbarbell.com,www.silverbackbarbell.com"
+    "TURNSTILE_HOSTNAMES": "silverbackbarbell.com,www.silverbackbarbell.com",
+    // Must be on the onboarded domain, or the send is rejected.
+    "SIGNUP_NOTIFICATION_FROM": "notifications@silverbackbarbell.com",
+    // Where signup notifications land. Empty until Evan sets it; the Worker
+    // skips the notification rather than erroring, and the subscriber row is
+    // written either way.
+    "SIGNUP_NOTIFICATION_TO": ""
   },
   "observability": {
     "enabled": true,

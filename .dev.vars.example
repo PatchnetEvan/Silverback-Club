@@ -1,5 +1,12 @@
-TURNSTILE_SECRET=replace-with-a-local-or-test-secret
+# Turnstile. Create the widget in the Cloudflare dashboard (or with the API),
+# then put its SECRET key here and its SITE key in .env as
+# PUBLIC_TURNSTILE_SITE_KEY. Without both, the signup form is not rendered at
+# all — see src/components/SignupForm.astro.
+TURNSTILE_SECRET=replace-with-the-turnstile-secret-key
 TURNSTILE_HOSTNAMES=localhost,127.0.0.1
-RESEND_API_KEY=replace-with-a-resend-api-key
+
+# Email goes through Cloudflare Email Sending via the `send_email` binding, so
+# there is no API key. Onboard the sender domain once:
+#   wrangler email sending enable silverbackbarbell.com
 SIGNUP_NOTIFICATION_TO=replace-with-evans-email-address
-SIGNUP_NOTIFICATION_FROM=SilverBack Barbell Club <replace-with-a-verified-sender>
+SIGNUP_NOTIFICATION_FROM=notifications@silverbackbarbell.com

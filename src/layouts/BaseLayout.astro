@@ -39,6 +39,18 @@ const currentPath = Astro.url.pathname;
           <a href="/workouts/" aria-current={currentPath.startsWith('/workouts') ? 'page' : undefined}>Workouts</a>
           <a href="/about/" aria-current={currentPath === '/about/' ? 'page' : undefined}>About</a>
           <a href="/app/" aria-current={currentPath === '/app/' ? 'page' : undefined}>3-2-1 Log</a>
+          {/* Where the club actually trains. Carried over from the WordPress
+              nav, which linked it as "Visit Bolt Training". Offsite, so it says
+              so — an external link that looks internal is a small dishonesty
+              the rest of this site does not commit.
+
+              Styled exactly like its neighbours rather than dimmed: --ink-faint
+              is the only quieter token and it fails AA on this ground (2.88:1
+              light, 4.22:1 dark), so the arrow carries the distinction instead
+              of the colour. The nav is three of our pages and one of theirs,
+              as peers. */}
+          <a href="https://www.bolttraining.com/" rel="noopener external"
+             >Bolt Training<span aria-hidden="true"> ↗</span></a>
         </nav>
         <div class="theme-controls" role="group" aria-label="Color theme">
           <button type="button" data-theme-choice="system" aria-pressed="true">Auto</button>
